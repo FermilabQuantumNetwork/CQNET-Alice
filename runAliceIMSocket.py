@@ -1,3 +1,7 @@
+#Starter code for remotely controlling powersupply using "socket" package.
+#Not functional.
+
+
 from VapScanFunc import *
 import pymysql
 import pyvisa as visa

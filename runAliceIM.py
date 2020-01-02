@@ -5,6 +5,7 @@
 #periodically does fine range scans to find and keep the IM at min power.
 #Alice has a 21 dB IM with one tuning voltage pin.
 #Requirements: Python3, AliceScanFunc.py in same directory, packages listed below
+# and in AliceScanFunc
 from AliceScanFunc import *
 import pymysql
 import pyvisa as visa
@@ -41,7 +42,7 @@ Vmax=15#in Volts
 feedbackPause = 60  #How long to wait between fine scans
 #Connect to powersupply
 VISAInstance=pyvisa.ResourceManager('@py')
-Resource=InitiateResource()
+Resource=InitiateResource() #See AliceScanFunc.py
 
 
 #Channel number corresponding to Alice's tuning pin.
@@ -249,6 +250,7 @@ except KeyboardInterrupt:
 	Parr = np.array(Parr)
 	VapArr = np.array(VapArr)
 	Pmin=min(Parr)
+	#Get the maximum extinction ratio from the run
 	best_eRatio=-10*np.log10(Pmin/DCmaxP)
 	eRatios=[]
 	t=[]
@@ -261,7 +263,7 @@ except KeyboardInterrupt:
 	eRatios=np.array(eRatios)
 	ExtRatioArr=np.array(ExtRatioArr)
 	t=np.array(t)
-	#Plot extinction ratio over times
+	#Plot extinction ratios over times
 	fig, axs = plt.subplots(3,1, num=20, sharex=True)
 	axs[0].plot(t,ExtRatioArr)
 	axs[0].set_ylabel(r"Power Extinction Ratio")
@@ -274,7 +276,7 @@ except KeyboardInterrupt:
 	axs[2].grid()
 	axs[2].set_xlabel("Index") #4 seconds
 	fig.suptitle(r"Best Power Extinction Ratio: {:.3f}".format(best_eRatio)+"\n"+"Max P: {:.3f} mW".format(DCmaxP*10**-6))
-	plt.show() #Shows all figures
+	plt.show() #Shows all figures produced by script
 if backup:
 	txtFile.close()
 plt.show()
