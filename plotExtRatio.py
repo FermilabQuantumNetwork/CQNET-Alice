@@ -10,11 +10,10 @@ import datetime
 import math
 import pymysql
 import os
-import matplotlib as mpl
 
 #Start and end datetimes that define range of data to retrieve from mysql table
-START_TIME = '2019-12-09 17:03:08'
-END_TIME = '2019-12-09 18:00:00'
+START_TIME = '2019-12-09 16:00:00'
+END_TIME = '2019-12-09 16:10:00'
 
 
 TABLE_NAME = 'ratiorecord'
@@ -22,7 +21,7 @@ TABLE_NAME = 'ratiorecord'
 
 #Connect to mysql database
 db = pymysql.connect(host="192.168.0.125",  #IP of computer with database. Local host if is same computer.
-					 user="inqnet1", #username
+					 user="inqnet4", #username
 					 passwd="Teleport1536!",  # your password
 					 db="extinctionR", #name of the database
 					 charset='utf8mb4',
@@ -34,9 +33,6 @@ datetimeArr=[]
 vmaxArr=[]
 vavArr=[]
 
-mpl.rcParams["savefig.directory"] = os.chdir(os.path.dirname("/home/inqnet1/Desktop/CQNET/CQNET-Interf"))
-
-
 try:
 	#Create cursor to select data from mysql.
 	with db.cursor() as cur:
@@ -47,20 +43,16 @@ try:
 		row = cur.fetchone()
 		while row is not None:
 			vmax = row["vmax"]
-			vmaxArr.append(1000*vmax)
+			vmaxArr.append(vmax)
 			vav = row["vav"]
-			vavArr.append(1000*vav)
-			eRat = -10*np.log10(vav/vmax)
+			vavArr.append(vav)
+			eRat = -10*np.log(vav/vmax)
 			ExRatioArr.append(eRat)
 			datetimeArr.append(row["datetime"])
 			row = cur.fetchone()
 finally: #Once store the data of each column in separate arrays, close the database
 	db.close()
 
-vmaxArr=np.array(vmaxArr)
-vavArr=np.array(vavArr)
-ExRatioArr=np.array(ExRatioArr)
-datetimeArr=np.array(datetimeArr)
 
 #Get the first and last datetimes of the Vav data. The retrieved data falls within the
 #bounds of the start and end times that were specified, but may not be exactly the same.
@@ -87,14 +79,11 @@ axs[0].set_ylabel(r"Ext Ratio")
 axs[0].grid()
 #Vin Plot
 axs[1].plot(datetime_el, vavArr,  linestyle = 'none', marker = '.', markersize = 2)
-axs[1].set_ylabel(r"$V_{min,av}$ (mV)")
+axs[1].set_ylabel(r"$V_{min,av}$ (V)")
 axs[1].grid()
 #Phase Plot
 axs[2].plot(datetime_el, vmaxArr,  linestyle = 'none', marker = '.', markersize = 2)
-axs[2].set_ylabel(r"$V_{max}$ (mV)")
+axs[2].set_ylabel(r"$V_{max}$ (V)")
 axs[2].grid()
-xmin1=0
-xmax1=0
-fig.suptitle("Alice's Pulse Extinction Ratio from \n"+str(datetimeArr[0]+datetime.timedelta(minutes=xmin1))+" to "+str(datetimeArr[-1]+datetime.timedelta(minutes=-xmax1)))
+fig.suptitle("Alice's Pulse Extinction Ratio from \n"+str(time_Vap[0]+datetime.timedelta(minutes=xmin1))+" to "+str(time_Vap[0]+datetime.timedelta(minutes=xmax1)))
 plt.xlabel('Elapsed time (min)', fontsize =16)
-plt.show()
