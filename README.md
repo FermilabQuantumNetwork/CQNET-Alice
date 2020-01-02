@@ -6,7 +6,7 @@ Code for monitoring Alice
 2. `plotExtRatio.py` (Python3, Documented, INQNET1) -- Plots the extinction ratio vs time for Alice's intensity modulator (IM) using data stored in the mysql database.
 3. `runAliceIM.py` (Python3, Documented, INQNET4) -- Runs tuning voltage/optical power optimization code for Alice's intensity modulator.
 4. `runAliceIMmanual.py` (Python3, Documented, INQNET4) -- Runs tuning voltage/optical power optimization code for Alice's intensity modulator, using the current voltage setting of the power supply. First find the optimal tuning voltage manually and set the power supply to that value.
-5. `runAliceIMSocket.py` (Python3, Documented, INQNET4) -- Starter code for running the tuning voltage/optical power optimization code for Alice, using the "socket" software package to remotely control the power supply.
+5. `runAliceIMSocket.py` (Python3, Not Documented, INQNET4) -- Starter code for running the tuning voltage/optical power optimization code for Alice, using the "socket" software package to remotely control the power supply.
 
 
 ## Requirements
