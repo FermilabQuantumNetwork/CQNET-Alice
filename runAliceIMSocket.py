@@ -16,13 +16,13 @@ import matplotlib as mpl
 mpl.rcParams["savefig.directory"] = os.chdir(os.path.dirname("/home/inqnet4/Desktop/CQNET/Alice"))
 
 
-db = pymysql.connect(host = "192.168.0.125", #Wired IPv4 Address
-					user ="INQNET4", # this user only has access to CP
-					password="Teleport1536!", # your password
-					database="teleportcommission",
-					charset='utf8mb4',
-					#port = 5025,
-					cursorclass=pymysql.cursors.DictCursor) #name of the data
+db = pymysql.connect(host="<IP ADDRESS>",  #Replace <IP ADDRESS> with the IP of computer with database. Local host if is same computer.
+					 user="<USERNAME>", #Replace <USERNAME> with your username
+					 passwd="<PASSWORD>",  #Replace <PASSWORD> with your password
+					 database="teleportcommission",
+					 charset='utf8mb4',
+					 #port = 5025,
+					 cursorclass=pymysql.cursors.DictCursor) #name of the data
 
 input_buffer = 1024#4096 #Temp buffer for rec data.
 exRat = 0

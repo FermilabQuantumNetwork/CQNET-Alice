@@ -20,12 +20,12 @@ mpl.rcParams["savefig.directory"] = os.chdir(os.path.dirname("/home/inqnet4/Desk
 
 
 #Connect to mysql database
-db = pymysql.connect(host = "192.168.0.125",  #IP of computer with database. Local host if is same computer.
-					user ="INQNET4", # username
-					password="Teleport1536!", # your password
-					database="teleportcommission", #name of database
-					charset='utf8mb4',
-					cursorclass=pymysql.cursors.DictCursor) #name of the data
+db = pymysql.connect(host="<IP ADDRESS>",  #Replace <IP ADDRESS> with the IP of computer with database. Local host if is same computer.
+					 user="<USERNAME>", #Replace <USERNAME> with your username
+					 passwd="<PASSWORD>",  #Replace <PASSWORD> with your password
+					 database="teleportcommission", #name of database
+					 charset='utf8mb4',
+					 cursorclass=pymysql.cursors.DictCursor) #name of the data
 
 
 #Connect to powermeter
@@ -120,8 +120,8 @@ except KeyboardInterrupt:
 	best_eRatio=-10*np.log10(Pmin/DCmaxP)
 	eRatios=[]
 	for p in P:
-	    e = -10*np.log10(p/DCmaxP)
-	    eRatios.append(e)
+		e = -10*np.log10(p/DCmaxP)
+		eRatios.append(e)
 	eRatios=np.array(eRatios)
 	fig, axs = plt.subplots(2,1, num=20, sharex=True)
 	#Plot extinction ratios over times
