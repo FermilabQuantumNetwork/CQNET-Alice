@@ -38,5 +38,11 @@ Below are listed all the packages that are used in this repo. Many may already b
 * requests
 
 
+### Installation command
 To install python packages, use:
 * `python3 -m pip install --user <package1> <package2> ...`
+
+##### For tips and other useful commands for getting started, see the CQNET repo's README.
+
+---
+This code was written by Sam Davis at Caltech. Contact me at s1dav1s@alumni.stanford.edu if you have any questions.
